@@ -6,9 +6,12 @@
 </head>
 <body>
     <form th:action="@{/formeval}" method="post">
-        <label for="av">Eingabe</label>
-        <input type="text" id="av" name="y" autofocus="autofocus" />
+        <h1 th:text="${v1}"></h1>
+        <label for="av" th:text="#{eingabe}" />
+        <!-- Kommentar -->
+        <input type="text" id="av" name="variable1" autofocus="autofocus" th:value="${v1}"/>
         <input id="submit" type="submit" value="HALLO" />
     </form>
+    <span th:text="#{test}"/>
 </body>
 </html>
