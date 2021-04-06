@@ -1,7 +1,6 @@
 package at.ac.htlstp.s2020.k5bhet.demoserver.controller;
 
 import at.ac.htlstp.s2020.k5bhet.demoserver.model.FormModel;
-import at.ac.htlstp.s2020.k5bhet.demoserver.service.AdressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(path="")
 public class WebController {
-
-    @Autowired
-    private AdressService adressService;
-
-    @RequestMapping("/a")
-    public String forma(Model model) {
-        model.addAttribute("adressen",adressService);
-        return "a";
-    }
 
     @GetMapping("")
     public String test(Model model) {
