@@ -13,6 +13,7 @@
         <input id="submit" type="submit" value="HALLO" />
     </form>
     <span th:text="#{test}"/>
-    <a th:href="@{/logout}">Logout</a>
+    <p><a th:href="@{${logout}}" th:text="#{logout}" /></p>
+    <a th:href="@{${info}}"  th:text="#{info}" />
 </body>
 </html>

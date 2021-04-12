@@ -33,12 +33,16 @@ public class WebController {
 
     @RequestMapping("/form")
     public String form(Model model) {
+        model.addAttribute("logout",Endpoints.logout);
+        model.addAttribute("info",Endpoints.info);
         return "form";
     }
 
     @RequestMapping("/formeval")
     public String formEvaluate(@ModelAttribute FormModel formModel, Model model) {
         model.addAttribute("v1",formModel.getVariable1());
+        model.addAttribute("logout",Endpoints.logout);
+        model.addAttribute("info",Endpoints.info);
         return "form";
     }
 
@@ -48,12 +52,20 @@ public class WebController {
     }
 
     @GetMapping(Endpoints.logout)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:"+Endpoints.login;
+    }
+
+    @RequestMapping(Endpoints.info)
+    public String info(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("auth",auth);
+        model.addAttribute("logout",Endpoints.logout);
+        return "info";
     }
 
 }
