@@ -7,5 +7,6 @@ public class Endpoints {
     public static final String ping   = "/ping";
     public static final String info   = "/info";
     public static final String css    = "/css";
+    public static final String open   = "/open";
 
 }
