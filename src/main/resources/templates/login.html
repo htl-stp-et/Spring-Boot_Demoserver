@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>LeTTo Login</h1>
+    <!--p th:if="${loginError}" class="error">Wrong user or password</p-->
+    <!--div th:if="${paramerror}" th:text="#{login.falsch}" /-->
+    <div th:if="${param.logout}" th:text="#{login.logoutmeldung}" />
+    <form th:action="@{/login}" method="post">
+        <div><label th:text="#{login.benutzername}" /><input type="text" id="username" name="username" autofocus="autofocus"/></div>
+        <div><label th:text="#{login.passwort}" /><input type="password" id="password" name="password" /></div>
+        <div><input type="submit" th:value="#{login.button}"/></div>
+    </form>
+</body>
+</html>
