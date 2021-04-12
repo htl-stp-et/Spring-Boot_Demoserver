@@ -1,0 +1,20 @@
+
+# Starten des Docker-Containers aus dem gleichen Verzeichnis mit:
+# docker-compose up -d
+
+# Datenbank
+version: "3.9"
+
+# Einfacher http-Webserver auf Port 80 für den Deploy des Image-Verzeichnisses von LeTTo
+
+services:
+  ubuntu-apache:
+    # image: my-apache
+    build: .
+    volumes:
+      # Speichere die Datenbank im lokalen Filesystem
+      - c:/tmp/www:/var/www/html
+    ports:
+      - "7002:80"
+    restart: always
+

@@ -1,0 +1,41 @@
+
+# Starten des Docker-Containers aus dem gleichen Verzeichnis mit:
+# docker-compose up -d --build
+
+# Datenbank
+version: "3.9"
+
+# Einfacher http-Webserver auf Port 80 für den Deploy des Image-Verzeichnisses von LeTTo
+
+networks:
+  my-network-local:
+
+services:
+  mysql-local:
+    image: mysql-local
+    environment:
+      # Die Definition in der Docker-compose.yml überschreibt die Definition aus dem Dockerfile
+      # Die Variable MYSQL_ROOT_PASSWORD wird mit der Umgebungsvariablen ${MYSQL_ROOT_PASSWORD} gesetzt
+     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      - my-network-local
+    volumes:
+      # Speichere die Datenbank im lokalen Filesystem
+      - ${MYSQL_DATABASE_PATH}:/var/lib/mysql
+      - ${MYSQL_DUMP_PATH}:/opt/dump
+    ports:
+      - "${MYSQL_PORT}:3306"
+    restart: always
+
+  mysqladmin-local:
+    image: phpmyadmin:latest
+    networks:
+      - my-network-local
+    environment:
+      - PMA_HOST=mysql-local
+    ports:
+      - "${PHP_MYADMIN_PORT}:80"
+    depends_on:
+      - mysql-local
+    restart: always
+
